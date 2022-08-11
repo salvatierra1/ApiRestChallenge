@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("person")
+@RequestMapping("/api")
 public class PersonController {
 
     @Autowired
     private PersonService personService;
 
-    @PostMapping
+    @PostMapping("/person")
     public ResponseEntity<PersonDTO>save(@Valid @RequestBody PersonDTO person){
         return  ResponseEntity.status(HttpStatus.OK).body(personService.save(person));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/person/{id}")
     public ResponseEntity<PersonDTO>edit(@Valid @PathVariable Long id, @Valid @RequestBody PersonDTO person){
         return  ResponseEntity.status(HttpStatus.OK).body(personService.edit(id,person));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/person/{id}")
     public ResponseEntity<Void>save(@Valid @PathVariable Long id){
         personService.delete(id);
         return  ResponseEntity.status(HttpStatus.NO_CONTENT).build();
